@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Python Quiz - 40 Questions</title>
+<style>
+body {
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px;
+}
+h1 {
+  font-size: 2em;
+  margin-bottom: 10px;
+  text-align: center;
+}
+.question-card {
+  background-color: rgba(255,255,255,0.1);
+  border-radius: 20px;
+  padding: 20px;
+  width: 90%;
+  max-width: 600px;
+  margin-top: 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+.options button {
+  background-color: #ffffff20;
+  border: none;
+  color: white;
+  padding: 10px;
+  margin: 8px 0;
+  width: 100%;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.2s ease;
+}
+.options button:hover {
+  background-color: #ffffff40;
+}
+.feedback {
+  margin-top: 15px;
+  font-size: 1em;
+  font-weight: bold;
+}
+.next-btn {
+  margin-top: 20px;
+  background-color: #ffde59;
+  color: #000;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+}
+</style>
+</head>
+<body>
+
+<h1>🐍 Python Quiz - 40 Questions</h1>
+<h1>🐍 فارس ادرس منيح</h1>
+
+<div class="question-card">
+  <h2 id="question"></h2>
+  <div class="options" id="options"></div>
+  <div class="feedback" id="feedback"></div>
+  <button class="next-btn" id="nextBtn" style="display:none;">Next ➜</button>
+</div>
+
+<script>
+const quizData = [
+  // 1
+  {
+    question: "What does a Python function do?",
+    options: ["Stores values", "Performs a task", "Loops", "Creates constants"],
+    correct: 1,
+    explanation: "✅ Correct! A function performs a task.<br>🟢 بالعربي: الدالة تقوم بمهمة محددة."
+  },
+  // 2
+  {
+    question: "Which keyword defines a function in Python?",
+    options: ["function", "def", "func", "define"],
+    correct: 1,
+    explanation: "✅ Correct! 'def' is used.<br>🟢 بالعربي: 'def' تُستخدم لتعريف الدوال."
+  },
+  // 3
+  {
+    question: "Can a function take zero arguments?",
+    options: ["Yes", "No", "Only one", "Only two"],
+    correct: 0,
+    explanation: "✅ Correct! Functions can have zero arguments.<br>🟢 بالعربي: يمكن للدالة أن لا تأخذ أي وسيط."
+  },
+  // 4
+  {
+    question: "Can a function return multiple values?",
+    options: ["Yes", "No", "Only one", "Only two"],
+    correct: 0,
+    explanation: "✅ Correct! Functions can return multiple values using tuples.<br>🟢 بالعربي: يمكن للدالة إرجاع أكثر من قيمة عبر tuple."
+  },
+  // 5
+  {
+    question: "How do you call a function with two arguments?",
+    options: ["function_name()", "function_name(arg1, arg2)", "def function_name(arg1, arg2)", "return function_name"],
+    correct: 1,
+    explanation: "✅ Correct! Call with arguments inside parentheses.<br>🟢 بالعربي: تستدعى الدالة بوضع الوسائط داخل الأقواس."
+  },
+  // 6
+  {
+    question: "What is returned by a function with no return statement?",
+    options: ["0", "None", "Empty string", "Error"],
+    correct: 1,
+    explanation: "✅ Correct! Python returns None.<br>🟢 بالعربي: إذا لم تحتوي الدالة على return، تُعيد None."
+  },
+  // 7
+  {
+    question: "Which of these is NOT same as function?",
+    options: ["Procedure", "Method", "Routine", "Variable"],
+    correct: 3,
+    explanation: "✅ Correct! Variable is not same as function.<br>🟢 بالعربي: المتغير ليس وظيفة."
+  },
+  // 8
+  {
+    question: "What is a parameter?",
+    options: ["Input to function", "Output of function", "Variable", "Loop statement"],
+    correct: 0,
+    explanation: "✅ Correct! Parameter is input.<br>🟢 بالعربي: المعامل هو قيمة مدخلة للدالة."
+  },
+  // 9
+  {
+    question: "What is an argument?",
+    options: ["Output", "Input", "Function name", "Keyword"],
+    correct: 1,
+    explanation: "✅ Correct! Argument is value passed to parameter.<br>🟢 بالعربي: الوسيط هو القيمة المرسلة للمعامل."
+  },
+  // 10
+  {
+    question: "Example: def add_two_numbers(number1, number2): return number1+number2. How many input arguments?",
+    options: ["0", "1", "2", "3"],
+    correct: 2,
+    explanation: "✅ Correct! Two input arguments.<br>🟢 بالعربي: هذه الدالة تحتاج وسيطين."
+  },
+  // 11
+  {
+    question: "How many output values does add_two_numbers return?",
+    options: ["0", "1", "2", "3"],
+    correct: 1,
+    explanation: "✅ Correct! Returns 1 value.<br>🟢 بالعربي: تُعيد قيمة واحدة."
+  },
+  // 12
+  {
+    question: "If mark = 90, grade function returns?",
+    options: ["A", "B", "C", "D"],
+    correct: 0,
+    explanation: "✅ Correct! 90 corresponds to grade A.<br>🟢 بالعربي: 90 تعني الدرجة A."
+  },
+  // 13
+  {
+    question: "If mark = 62, grade function returns?",
+    options: ["A", "B", "C", "D"],
+    correct: 1,
+    explanation: "✅ Correct! 62 → grade B.<br>🟢 بالعربي: 62 تعني الدرجة B."
+  },
+  // 14
+  {
+    question: "If mark = 5, grade function returns?",
+    options: ["A", "B", "C", "D"],
+    correct: 3,
+    explanation: "✅ Correct! 5 → grade D.<br>🟢 بالعربي: 5 تعني الدرجة D."
+  },
+  // 15
+  {
+    question: "How many input arguments does ask_name() take?",
+    options: ["0", "1", "2", "Depends"],
+    correct: 0,
+    explanation: "✅ Correct! Takes 0 inputs.<br>🟢 بالعربي: هذه الدالة لا تحتاج أي وسيط."
+  },
+  // 16
+  {
+    question: "How many output values does ask_name() return?",
+    options: ["0", "1", "2", "3"],
+    correct: 2,
+    explanation: "✅ Correct! Returns first_name and last_name.<br>🟢 بالعربي: تُعيد الاسم الأول والأخير."
+  },
+  // 17
+  {
+    question: "How many input arguments does say_hello(first_name, last_name) take?",
+    options: ["0", "1", "2", "3"],
+    correct: 2,
+    explanation: "✅ Correct! Needs both first and last names.<br>🟢 بالعربي: تحتاج الاسم الأول والأخير."
+  },
+  // 18
+  {
+    question: "How many output values does say_hello() return?",
+    options: ["0", "1", "2", "3"],
+    correct: 0,
+    explanation: "✅ Correct! It prints, does not return.<br>🟢 بالعربي: تطبع فقط، لا تُعيد قيمة."
+  },
+  // 19
+  {
+    question: "Expanding word: word='Cat', factor=2 → result?",
+    options: ["Cat", "CCaatt", "Caat", "CCaat"],
+    correct: 1,
+    explanation: "✅ Correct! Each letter is repeated factor times.<br>🟢 بالعربي: كل حرف يُكرر 2 مرة."
+  },
+  // 20
+  {
+    question: "Expanding word: factor=0 → result?",
+    options: ["Empty", "Original word", "Error", "Factor"],
+    correct: 1,
+    explanation: "✅ Correct! Factor 0 returns original word.<br>🟢 بالعربي: الناتج هو الكلمة الأصلية."
+  },
+  // 21
+  {
+    question: "Generate password: replace i→1, r→7, s→5, z→2. 'zebra8' →?",
+    options: ["ze7bra8", "2eb7a8", "password", "zeb8ra"],
+    correct: 1,
+    explanation: "✅ Correct! 'zebra8' → '2eb7a8'.<br>🟢 بالعربي: تم التحويل حسب القواعد."
+  },
+  // 22
+  {
+    question: "Default argument: welcome(name, greeting='Hi'). welcome('Paul') prints?",
+    options: ["Hi Paul!", "Hello Paul!", "It is nice Paul", "Error"],
+    correct: 0,
+    explanation: "✅ Correct! Default greeting is used.<br>🟢 بالعربي: الكلمة الافتراضية 'Hi' تُستخدم."
+  },
+  // 23
+  {
+    question: "Round 28.30188679245283 to 2 decimals?",
+    options: ["28", "28.3", "28.30", "28.302"],
+    correct: 2,
+    explanation: "✅ Correct! 28.30<br>🟢 بالعربي: تقريب لرقمين عشريين."
+  },
+  // 24
+  {
+    question: "Min of 1.5, 5, 3?",
+    options: ["1.5", "3", "5", "None"],
+    correct: 0,
+    explanation: "✅ Correct! Min is 1.5.<br>🟢 بالعربي: أصغر قيمة هي 1.5."
+  },
+  // 25
+  {
+    question: "Max of 1.5, 5, 3?",
+    options: ["1.5", "3", "5", "None"],
+    correct: 2,
+    explanation: "✅ Correct! Max is 5.<br>🟢 بالعربي: أكبر قيمة هي 5."
+  },
+  // 26
+  {
+    question: "How many values can a Python function return?",
+    options: ["0", "1", "Multiple", "Only two"],
+    correct: 2,
+    explanation: "✅ Correct! Python functions can return multiple values.<br>🟢 بالعربي: يمكن إرجاع عدة قيم."
+  },
+  // 27
+  {
+    question: "Function with no arguments and return: def func(): return 5. Output?",
+    options: ["Error", "5", "None", "0"],
+    correct: 1,
+    explanation: "✅ Correct! Returns 5.<br>🟢 بالعربي: تُعيد القيمة 5."
+  },
+  // 28
+  {
+    question: "Calling a function incorrectly may cause?",
+    options: ["Syntax error", "Logical error", "Runtime error", "No effect"],
+    correct: 2,
+    explanation: "✅ Correct! Wrong call → runtime error.<br>🟢 بالعربي: الاستدعاء الخطأ يسبب خطأ أثناء التشغيل."
+  },
+  // 29
+  {
+    question: "What are input arguments also called?",
+    options: ["Parameters", "Outputs", "Variables", "Keywords"],
+    correct: 0,
+    explanation: "✅ Correct! Inputs are parameters.<br>🟢 بالعربي: وسائط الإدخال تُسمى معاملات."
+  },
+  // 30
+  {
+    question: "What are return values also called?",
+    options: ["Parameters", "Outputs", "Inputs", "Variables"],
+    correct: 1,
+    explanation: "✅ Correct! Return values are outputs.<br>🟢 بالعربي: القيم المرجعة تُسمى مخرجات."
+  },
+  // 31
+  {
+    question: "Function terminology: procedure, method, routine → same as?",
+    options: ["Loop", "Function", "Variable", "Class"],
+    correct: 1,
+    explanation: "✅ Correct! All are equivalent to function.<br>🟢 بالعربي: جميعها تشير للدالة."
+  },
+  // 32
+  {
+    question: "If a function adds two numbers, how many inputs?",
+    options: ["0", "1", "2", "3"],
+    correct: 2,
+    explanation: "✅ Correct! Needs two numbers.<br>🟢 بالعربي: تحتاج رقمين."
+  },
+  // 33
+  {
+    question: "If a function adds two numbers, how many outputs?",
+    options: ["0", "1", "2", "Multiple"],
+    correct: 1,
+    explanation: "✅ Correct! Returns sum.<br>🟢 بالعربي: تعطي المجموع."
+  },
+  // 34
+  {
+    question: "When designing a function, what to ask first?",
+    options: ["Return value", "Input needed", "Function name", "Variable type"],
+    correct: 1,
+    explanation: "✅ Correct! First ask what inputs are needed.<br>🟢 بالعربي: يجب تحديد مدخلات الدالة أولاً."
+  },
+  // 35
+  {
+    question: "What does 'None' represent in Python?",
+    options: ["Empty", "No return", "0", "Error"],
+    correct: 1,
+    explanation: "✅ Correct! Represents no return value.<br>🟢 بالعربي: تعني عدم وجود قيمة مرجعة."
+  },
+  // 36
+  {
+    question: "Default argument allows function call without?",
+    options: ["Any input", "All inputs", "Some inputs", "No input"],
+    correct: 2,
+    explanation: "✅ Correct! Can skip optional inputs.<br>🟢 بالعربي: يمكن تخطي الوسائط الاختيارية."
+  },
+  // 37
+  {
+    question: "round(28.301886792,3) = ?",
+    options: ["28.301", "28.302", "28.3", "28"],
+    correct: 1,
+    explanation: "✅ Correct! Rounded to 3 decimals.<br>🟢 بالعربي: تقريب لثلاثة أرقام عشرية."
+  },
+  // 38
+  {
+    question: "min(2,3,1) = ?",
+    options: ["1", "2", "3", "0"],
+    correct: 0,
+    explanation: "✅ Correct! Minimum is 1.<br>🟢 بالعربي: الحد الأدنى هو 1."
+  },
+  // 39
+  {
+    question: "max(2,3,1) = ?",
+    options: ["1", "2", "3", "0"],
+    correct: 2,
+    explanation: "✅ Correct! Maximum is 3.<br>🟢 بالعربي: الحد الأقصى هو 3."
+  },
+  // 40
+  {
+    question: "Function with default greeting: welcome('Mary', greeting='It is nice') → output?",
+    options: ["Hi Mary!", "It is nice to meet you Mary!", "Hello Mary!", "Error"],
+    correct: 1,
+    explanation: "✅ Correct! Uses provided greeting.<br>🟢 بالعربي: تستخدم التحية المُعطاة."
+  }
+];
+
+let currentQuestion = 0;
+const questionEl = document.getElementById("question");
+const optionsEl = document.getElementById("options");
+const feedbackEl = document.getElementById("feedback");
+const nextBtn = document.getElementById("nextBtn");
+
+function loadQuestion() {
+  feedbackEl.textContent = "";
+  nextBtn.style.display = "none";
+  const q = quizData[currentQuestion];
+  questionEl.textContent = `${currentQuestion + 1}. ${q.question}`;
+  optionsEl.innerHTML = "";
+  q.options.forEach((opt, index) => {
+    const btn = document.createElement("button");
+    btn.textContent = opt;
+    btn.onclick = () => checkAnswer(index);
+    optionsEl.appendChild(btn);
+  });
+}
+
+function checkAnswer(selected) {
+  const q = quizData[currentQuestion];
+  if (selected === q.correct) {
+    feedbackEl.innerHTML = `<span style="color:#0f0;">✅ Correct!</span><br>${q.explanation}`;
+  } else {
+    feedbackEl.innerHTML = `<span style="color:#f33;">❌ Wrong!</span><br>${q.explanation}`;
+  }
+  nextBtn.style.display = "block";
+}
+
+nextBtn.onclick = () => {
+  currentQuestion++;
+  if (currentQuestion < quizData.length) {
+    loadQuestion();
+  } else {
+    questionEl.textContent = "🎉 Quiz Completed!";
+    optionsEl.innerHTML = "";
+    feedbackEl.textContent = "Excellent job!";
+    nextBtn.style.display = "none";
+  }
+};
+
+loadQuestion();
+</script>
+
+</body>
+</html>
